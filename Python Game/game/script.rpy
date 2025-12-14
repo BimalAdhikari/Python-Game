@@ -1,12 +1,5 @@
 ﻿# The script of the game goes in this file.
 
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
-
-define e = Character("Eileen")
-
-define Shockwave = Character("Shockwave" , color="#66009c")
-
 
 # The game starts here.
 
@@ -16,21 +9,23 @@ label start:
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
 
-    scene bg room
+    scene bg_school
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    show eileen happy
+    show Oreki casual at left with dissolve
 
     # These display lines of dialogue.
 
-    Shockwave "Hi my name is Shockwave! Welcome to my Ren'Py game!"
+    Oreki "Hi my name is Oreki welcome to our school!"
 
-    e "You've created a new Ren'Py game."
+    show Eileen casual at right with moveinright
 
-    e "Once you add a story, pictures, and music, you can release it to the world!"
+    Eileen "You've created a new Ren'Py game."
+
+    Eileen  "Once you add a story, pictures, and music, you can release it to the world!"
 
     # This ends the game.
 
