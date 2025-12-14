@@ -5,6 +5,8 @@
 
 define e = Character("Eileen")
 
+define Shockwave = Character("Shockwave" , color="#66009c")
+
 
 # The game starts here.
 
@@ -23,6 +25,8 @@ label start:
     show eileen happy
 
     # These display lines of dialogue.
+
+    Shockwave "Hi my name is Shockwave! Welcome to my Ren'Py game!"
 
     e "You've created a new Ren'Py game."
 
