@@ -12,7 +12,7 @@ image bg hallway = "hallway.jpg"
 image bg patient_room = "patient_room.jpg"
 image bg office = "office.jpg"
 image bg basement = "basement.jpg"
-image bg operating = "operating.jpg"
+image bg operating = "operating_room.jpg"
 image bg window = "window.jpg"
 
 #transformers 
@@ -204,6 +204,100 @@ menu:
         nurse "Please don't worry about it. Just come with me."
         $ sanity -= 10
         jump nurse_encounter
+
+label nurse_encounter:
+    scene bg hallway
+    with fade
+
+    show nurse lily concerned at slightRight
+    show mikey normal at slightLeft
+    
+    nurse "What are you doing out here alone at this time of night?"
+
+if found_key:
+        mikey "I found something strange in the doctor's office. A file about me with old dates and a key."
+        nurse "That's not possible. You just arrived here a few days ago. Let me see that."
+        "Her hannds tremble as she takes the file from me."
+        nurse "This... this can't be... there must be some mistake."
+        $ trust_doctor -= 10
+else:
+        mikey "I heard voices. This place doesn't feel right."
+        nurse "You must be imagining things. It must be the medication."
+
+
+menu:
+    "Ask about Dr. Yeager":
+        mikey "What can you tell me about Dr. Yeager?"
+        nurse "He is the head physician here. He is very dedicated to his work."
+        nurse "But sometimes, he is too dedicated. He can be... intense."
+        mikey "what do you mean by intense?"
+        nurse"Nothing, forget i said anything."
+        $ sanity -= 15
+
+    "Ask to call family":
+        mikey "Can you help me contact my family?"
+        nurse "I am sorry but the phones are down right now due to the storm outside."
+        nurse "But don't worry you can try to call them in the morning."
+        "Her answer feels rehearsed."
+
+nurse "Now please, go back to your room for your own good."
+    jump basement_choice
+
+label return_room:
+    scene bg patient_room
+    with fade
+
+    show mikey normal at center
+
+    "back in my room, the feeling of being watched intensifies."
+    play sound heartbeat
+
+    "My heart is racing. I need to calm down."
+    "The walls seems to be... breathing."
+
+    voice "You can't hide from them. They are coming for you."
+
+menu:
+    "look out the window":
+        scene bg window
+        with dissolve
+        "The window looks out into a dark, stormy night."
+        "lightning flashes, illuminating the garden below. A figure stands there, motionless."
+        "wait is that... me?"
+        $ sanity -= 25
+        jump nightmare_sequence
+
+    "Check the door":
+        "The door is locked from the outside."
+        "scratches on the inside of the door"
+        "How long have I been in here?"
+        $sanity -= 20
+        jump basement_choice
+
+label basement_choice:
+    scene bg hallway
+    with fade
+
+    "the hallway seems longer than before."
+    "All signs point towards the basement. At the end of the hall, the basement door looms."
+
+    play sound whisper
+    voice "The truth lies below."
+
+menu:
+    "Go to the basement" if found_key or sanity < 70:
+        jump basement_explore 
+
+    "Return to room":
+        jump safe_ending
+
+    "Confront Dr. Yeager":
+        jump doctor_confrontation
+
+
+    
+
+
 
 
 
