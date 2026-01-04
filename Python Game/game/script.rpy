@@ -45,17 +45,18 @@ label start:
     $ saw_basement = False
     $ talked_to_nurse = False
     $ found_key = False
-    $ trust doctor = 0
+    $ trust_doctor = 0
     $ sanity = 100
 
 "welcome to Haunted Asylum visual novel."
-    play music ambient loop
-    scene black
-    with fade
 
-    "My head is pounding and I don't remember how I got here."
-    "Where am I?"
-    "The last thing I remember is..... the car accident..."
+play music ambient loop
+scene black
+with fade
+
+"My head is pounding and I don't remember how I got here."
+"Where am I?"
+"The last thing I remember is..... the car accident..."
 
 scene bg patient_room
 with dissolve
@@ -89,10 +90,10 @@ doctor "Yes they do and they are very worried about you."
 "But right now, you need to focus on getting some rest."
 
 menu:
-        "Ask about leaving the hospital":
-        mikey "when can I leave this place?":
+    "Ask about leaving the hospital":
+        mikey "when can I leave this place?"
         doctor "Well, hopefully soon once there are no complications."
-        $ trust doctor -= 5
+        $ trust_doctor -= 5
         show dr yeager smile at slightRight
         doctor "But for now. Try to get some sleep."
 
@@ -101,7 +102,7 @@ menu:
         doctor "You have a minor concussion, some bruises you were lucky."
         mikey "It doesn't feel like a minor concussion..."
         doctor "That's normal. The mind plays tricks on you sometimes during recovery."
-        $ trust doctor += 5
+        $ trust_doctor += 5
 
 hide dr yeager
 with moveoutright
@@ -132,14 +133,14 @@ play sound footsteps
 "someone is coming."
 
 menu:
-        "Hide in the nearby room":
-            jump hide_in_room
+    "Hide in the nearby room":
+        jump hide_in_room
         
-        "Continue down the hall":
-            jump continue_hall
+    "Continue down the hall":
+        jump continue_hall
 
-        "Return to your room":
-            jump return_room
+    "Return to your room":
+        jump return_room
 
 label hide_in_room:
     scene bg office
