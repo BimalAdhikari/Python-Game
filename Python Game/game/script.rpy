@@ -240,8 +240,8 @@ menu:
         nurse "But don't worry you can try to call them in the morning."
         "Her answer feels rehearsed."
 
-nurse "Now please, go back to your room for your own good."
-    jump basement_choice
+        nurse "Now please, go back to your room for your own good."
+        jump basement_choice
 
 label return_room:
     scene bg patient_room
