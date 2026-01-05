@@ -294,7 +294,82 @@ menu:
     "Confront Dr. Yeager":
         jump doctor_confrontation
 
+label basement_explore:
+    $ saw_basement = True
+    scene bg basement
+    with fade
 
+    play music horror loop
+
+    "The basement is cold. The air smells of antiseptic and something else...."
+    "Something metallic."
+
+    show mikey shocked at center
+    
+    mikey "What is this place?"
+
+    "Medical equipment, but old really old and rusty. Like from another era."
+    "Files. So many files, all filled with patient photos that look terrified"
+
+    "A journal lies open on the desk:"
+
+    center "Day 127: Subject shows increased resistance. The serum needs some adjustments."
+    center "Day 132: Memories are returning. Must increase serum dosage."
+    center "Day 146: He asked about his family today. Had to adminster a shock treatment."
+
+    mikey "No.... this can't be..."
+
+    show dr yeager angry at slightLeft
+    with moveinright
+
+    play sound door_creak
+
+    doctor "I'm disappointed, Mikey. You were not supposed to see all of this."
+
+    mikey "what have you done to me?"
+
+    doctor "We are helping you. Your mind was fractured in the car accident."
+    doctor "We are putting you back together. Better. Stronger."
+
+    menu:   
+        "Try to escape":
+            jump escape_attempt
+        "Ask why":
+            jump ask_why
+        "Attack the doctor":
+            jump violent_ending
+
+label nightmare_sequence:
+    scene black
+    with dissolve
+
+    play music tense
+
+    "Everything goes dark."
+    "Voices overlap, screaming, pleading..."
+
+    voice "Don't trust them"
+    voice "You've been here before!"
+    voice "Wake up! WAKE UP!."
+
+    scene bg operating
+    with flashes
+
+    "A bright light. Surgical toolse."
+    "Strapped to a table. Dr. yeager leaning over me."
+
+    doctor "The procedure is almost complete. Just a bit longer..."
+
+    menu:
+        "Screm for help":
+            voice "NO ONE CAN HEAR YOU"
+            jump bad__ending
+
+        "Foucus on a memory":
+            "My daughter's laugh. Her birthday party. The cake..."
+            "REAL. That memory is REAL."
+            $ sanity += 30
+        
     
 
 
