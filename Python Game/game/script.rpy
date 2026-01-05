@@ -1,6 +1,5 @@
 ﻿init python:
     #Data for endings
-    default persistent.endings = set()
     if persistent.endings is None:
         persistent.endings = set()
     
@@ -360,7 +359,7 @@ label nightmare_sequence:
     voice "Wake up! WAKE UP!."
 
     scene bg operating
-    with flashes
+    with fade
 
     "A bright light. Surgical toolse."
     "Strapped to a table. Dr. yeager leaning over me."
@@ -370,14 +369,14 @@ label nightmare_sequence:
     menu:
         "Screm for help":
             voice "NO ONE CAN HEAR YOU"
-            jump bad__ending
+            jump bad_ending
 
         "Foucus on a memory":
             "My daughter's laugh. Her birthday party. The cake..."
             "REAL. That memory is REAL."
             $ sanity += 30
         
-label doctor_confrontation
+label doctor_confrontation:
     scene bg office
     with fade
 
@@ -428,7 +427,7 @@ label awakening:
 
     jump true_awakening
 
-label true_awakening
+label true_awakening:
     scene bg operating
     with fade
 
@@ -479,26 +478,26 @@ label escape_attempt:
     "Footsteps from above. More than one person."
 
     menu:
-        "Hide"
-        "I duck behind a old filing cabinet as the guards run past me."
-        "Nurse Lily is with them. She looks... different. Angry."
+        "Hide":
+            "I duck behind a old filing cabinet as the guards run past me."
+            "Nurse Lily is with them. She looks... different. Angry."
         
-    if talked_to_nurse:
-        nurse "Find him! The subject can't leave!"
-    jump hidden_escape
+            if talked_to_nurse:
+                nurse "Find him! The subject can't leave!"
+            jump hidden_escape
 
-    "Run upstairs":
-        "I sprint up the stairs, taking them two at a time."
-        "The door at the top is locked!"
+        "Run upstairs":
+            "I sprint up the stairs, taking them two at a time."
+            "The door at the top is locked!"
         
-        if found_key
-            "The key! It fits!"
-            jump freedom_ending
-        else:
-            "Trapped! The guards catch up..."
-            jump captured_ending
+            if found_key:
+                "The key! It fits!"
+                jump freedom_ending
+            else:
+                "Trapped! The guards catch up..."
+                jump captured_ending
 
-label hidden_escape
+label hidden_escape:
     scene bg hallway
     with fade
 
@@ -542,11 +541,11 @@ label safe_ending:
     scene black
     with dissolve
 
-    center "ENDING: COMPLIANT PATIENT"
-    center "you chose to trust the system."
-    center "The nightmares continue, but at least they are familiar."
+    centered "ENDING: COMPLIANT PATIENT"
+    centered "you chose to trust the system."
+    centered "The nightmares continue, but at least they are familiar."
 
-    $persistent.endings.add("safe") 
+    $ persistent.endings.add("safe") 
     jump endings_screen
 
 label tragic_ending:
@@ -564,9 +563,9 @@ label tragic_ending:
     scene black 
     with dissolve
 
-    center "ENDING: BlANK SLATE"
-    center "Your past is erased."
-    center "You future belongs to the doctor now"
+    centered "ENDING: BlANK SLATE"
+    centered "Your past is erased."
+    centered "You future belongs to the doctor now"
 
     $persistent.endings.add("tragic")
     jump endings_screen
@@ -586,10 +585,10 @@ label freedom_ending:
     scene black
     with dissolve
 
-    $persistent.endings.add("freedom")
+    $ persistent.endings.add("freedom")
     jump endings_screen
 
-label captured_ending
+label captured_ending:
     scene bg basement
     with fade
 
@@ -600,11 +599,116 @@ label captured_ending
     scene black 
     with dissolve
 
-    center "ENDING: RECAPTURED"
-    center "The experiment continues."
-    center "There are no more escape attempts."
+    centered "ENDING: RECAPTURED"
+    centered "The experiment continues."
+    centered "There are no more escape attempts."
 
-    $persistent.endings.add()
+    $ persistent.endings.add("captured")
+    jump endings_screen
+
+label ally_endings:
+    scene bg hospital_exterior
+    with fade 
+
+    "Nurse Lily leads me through the hidden passages."
+    "She has a car waiting. We drive in silence."
+    nurse "I'm sorry for everything."
+    "The sun is rising. For the first time in months. I feel hope."
+
+    scene black
+    with dissolve
+
+    centered "ENDING: UNLIKELY ALLY"
+    centered "You trusted when you should't have."
+    centered "Sometime, it pays off."
+
+    $ persistent.endings.add("ally")
+    jump endings_screen
+
+label violent_ending:
+    scene bg basement
+    with hpunch
+
+    play sound horror
+
+    "Rage takes over. I grab the surgical instrument."
+    "Dr. yeager does't scream. He just looks... dissapointed."
+    "The security arrives too late."
+    "But now there's blood on your hands. So much blood!!"
+
+    scene black
+    with dissolve
+
+    centered "ENDING: BECOMING THE MONSTER"
+    centered "You fought fire with fire."
+    centered "Now you burn with them."
+
+    $ persistent.endings.add("violent")
+    jump endings_screen
+
+label manipulation_ending:
+    scene bg office
+    with fade 
+
+    "I become Dr. yeager's assistant."
+    "At first, I pretend. Then I start to understand."
+    "The beauty of breaking minds to rebuild them."
+    "New patients arrive. I help them with their... treatment."
+
+    scene black 
+    with dissolve
+
+    centered "ENDING: THE APPRENTICE"
+    centered "If you can't them..."
+    centered "Join them. Then surpass them."
+
+    $ persistent.endings.add("manipulation")
+    jump endings_screen
+
+label bad_ending:
+    scene bg operating
+    with fade
+
+    play sound horror
+
+    "My screams echo in the empty room."
+    "No one comes. No one ever comes."
+    "Dr. yeager smiles as he adjusts the dials."
+
+    doctor "The screaming phase. It means we are close to a breakthrough."
+    doctor "Don't worry. Soon you won't remember how to scream at all."
+
+    "The world fades to white. Then to nothing."
+    "The last thing I feel is cold metal against my skin."
+    
+    scene black
+    with dissolve
+
+    centered "ENDING: LOST VOICE"
+    centered "You screamed into the void."
+    centered "The void didn't answer."
+
+    $ persistent.endings.add("bad")
+    jump endings_screen
+
+
+label endings_screen:
+    scene black
+    with dissolve
+
+    "You have unlocked one ending. There are a total of 9 endings."
+
+    menu:
+        "Play again to discover more endings":
+            jump start
+        "Quit game":
+            return
+
+#THE END
+
+
+
+
 
   
 
