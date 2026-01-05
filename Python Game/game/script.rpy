@@ -1,4 +1,11 @@
-﻿define config.name = "Haunted Asylum"
+﻿init python:
+    #Data for endings
+    default persistent.endings = set()
+    if persistent.endings is None:
+        persistent.endings = set()
+    
+
+define config.name = "Haunted Asylum"
 define gui.show_name = True
 define config.version = "1.0"
 define config.has_sound = True
@@ -520,6 +527,84 @@ label hidden_escape
             "I run torwards the exit sign."
             jump solo_escape 
 
+#endings
+label safe_ending:
+    scene bg patient_room
+    with fade  
+
+    play music soft loop
+
+    "I decide to trust Dr. Yeager. Maybe he is really trying to help."
+    "The treatment continues. The memories fade."
+    "Sometimes I wake up screaming, but I can't remember why."
+    "Dr. Yeager says that's progress."
+
+    scene black
+    with dissolve
+
+    center "ENDING: COMPLIANT PATIENT"
+    center "you chose to trust the system."
+    center "The nightmares continue, but at least they are familiar."
+
+    $persistent.endings.add("safe") 
+    jump endings_screen
+
+label tragic_ending:
+    scene bg operating
+    with fade
+
+    play music horror loop
+
+    "Dr. yeager increases the dosage. The world goes soft at the edges."
+    "My family's faces they fade away. Their voices fade away."
+    "The last thing I hear before complete darkness:"
+
+    doctor "Facinating. Complete memory wipe in 3 seconds."
+
+    scene black 
+    with dissolve
+
+    center "ENDING: BlANK SLATE"
+    center "Your past is erased."
+    center "You future belongs to the doctor now"
+
+    $persistent.endings.add("tragic")
+    jump endings_screen
+
+label freedom_ending:
+    scene bg hospital_exterior
+    with fade 
+
+    play music soft loop
+
+    "The key turns. The door opens to a cool night air"
+    "I run through the woods, branches tearing my clothes apart."
+    "Behind me, the hospital grows smaller"
+    "Ahead of me, lights. A small town."
+    "I don't know what's real anymore, but I'm finally free."
+
+    scene black
+    with dissolve
+
+    $persistent.endings.add("freedom")
+    jump endings_screen
+
+label captured_ending
+    scene bg basement
+    with fade
+
+    "Strong hands grab me. Needles pierce my skin."
+    doctor "sigh. We will have to start over."
+    "The world dissolves into chemicals and pain."
+
+    scene black 
+    with dissolve
+
+    center "ENDING: RECAPTURED"
+    center "The experiment continues."
+    center "There are no more escape attempts."
+
+    $persistent.endings.add()
 
   
 
