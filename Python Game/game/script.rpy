@@ -370,8 +370,160 @@ label nightmare_sequence:
             "REAL. That memory is REAL."
             $ sanity += 30
         
-    
+label doctor_confrontation
+    scene bg office
+    with fade
 
+    show dr yeager normal at slightRight
+    show mikey normal at slightLeft
+
+    mikey "I want answers, Doctor. NOW!!."
+
+    doctor "What would you like to know?"
+
+
+    menu:
+        "Why can't I remember the accident?":
+            mikey "Why don't I remember the accident?"
+            doctor "Traumatic amnesia. Common in these cases."
+            mikey "But I remember other things. Things that shouldn't be possible here."
+            $ trust_doctor -= 15
+
+        "Where are the other patients?":
+            mikey "This place is empty. Where are the other patients?"
+            doctor "Transferred. We're closing this wing."
+            "His eye twitches when he says this."
+            $ sanity -= 10
+
+    if trust_doctor < -10:
+        jump basement_explore
+    else:
+        doctor "You need to trust me, Mikey. I'm trying to help you."
+        jump safe_ending
+
+label awakening:
+    scene bg patient_room
+    with flash
+
+    show mikey shocked at center
+
+    mikey "It was a dream... but it felt so real."
+    
+    "Or was it a memory?"
+
+    play sound scratch
+
+    "Scratching from the walls. The same pattern every night."
+
+    voice "Seven scratches... count them..."
+
+    mikey "Seven months. I have been here for seven months now!!"
+
+    jump true_awakening
+
+label true_awakening
+    scene bg operating
+    with fade
+
+    "The truth hits me like a physical blow."
+    "I am not a patient. I am just a another test subject."
+    "An experiment"
+
+    show dr yeager smile at slightRight
+    with dissolve
+
+    doctor "Ah, you finally understand. Excellent."
+    doctor "The breakthrough always comes when they realize."
+
+    mikey "What are you doing to me?"
+
+    doctor "Exploring the limits of human consciousness. The resilience of memory."
+    doctor "you're special, Mikey. You can rebuild yourself from fragments."
+
+    menu:
+        "Beg for release":
+            mikey "Please, I have a family..."
+            doctor "Had. You had a family. The accident was... unfortunate."
+            doctor "But your loss is science's gain."
+
+        "Play along":
+            mikey "If I am so special, Let me help you."
+            doctor "Interesting. Most would beg for mercy."
+            jump manipulation_ending
+
+        "Remember your stength":
+            mikey "The memories aren't just pain. There is anger too. Power."
+            voice "FIGHT BACK!!!"
+            jump escape_attempt
+    
+label escape_attempt:
+    scene bg basement
+    with hpunch
+
+    play music horror
+
+    "I shove Dr. Yeager, knocking down equipment over."
+
+    show mikey scared at slightLeft
+    show dr_yeager_angry at slightRight
+
+    doctor "Security! He's getting away"
+
+    "Footsteps from above. More than one person."
+
+    menu:
+        "Hide"
+        "I duck behind a old filing cabinet as the guards run past me."
+        "Nurse Lily is with them. She looks... different. Angry."
+        
+    if talked_to_nurse:
+        nurse "Find him! The subject can't leave!"
+    jump hidden_escape
+
+    "Run upstairs":
+        "I sprint up the stairs, taking them two at a time."
+        "The door at the top is locked!"
+        
+        if found_key
+            "The key! It fits!"
+            jump freedom_ending
+        else:
+            "Trapped! The guards catch up..."
+            jump captured_ending
+
+label hidden_escape
+    scene bg hallway
+    with fade
+
+    "The hallway is clear. For now."
+    "Emergency exit sign glows red at the far end."
+
+    play sound footsteps
+
+    "More footsteps. Coming from both directions."
+
+    show nurse lily concerned at slightRight
+    with dissolve
+
+    nurse "Mikey! This way, quickly!"
+
+    menu:
+        "Trust her":
+            mikey "Why should I trust you?"
+            nurse "I also want to get out of here. I never agreed to any of this."
+            nurse "There is a service elevator. Follow me."
+            $ trust_doctor -= 30
+            jump ally_escape
+
+        "Run the other way":
+            mikey "Stay away from me!!"
+            "I run torwards the exit sign."
+            jump solo_escape 
+
+
+  
+
+            
 
 
 
