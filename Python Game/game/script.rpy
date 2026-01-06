@@ -1,7 +1,7 @@
-﻿init python:
-    #Data for endings
-    default persistent.endings = set()
-    if persistent.endings is None:
+﻿
+# Data for endings
+init -1 python:
+    if not hasattr(persistent, 'endings') or persistent.endings is None:
         persistent.endings = set()
     
 
