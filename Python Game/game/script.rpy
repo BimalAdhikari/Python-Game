@@ -1,5 +1,6 @@
 ﻿init python:
     #Data for endings
+    default persistent.endings = set()
     if persistent.endings is None:
         persistent.endings = set()
     
