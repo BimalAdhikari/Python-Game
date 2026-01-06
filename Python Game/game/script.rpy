@@ -320,9 +320,9 @@ label basement_explore:
 
     "A journal lies open on the desk:"
 
-    center "Day 127: Subject shows increased resistance. The serum needs some adjustments."
-    center "Day 132: Memories are returning. Must increase serum dosage."
-    center "Day 146: He asked about his family today. Had to adminster a shock treatment."
+    centered "Day 127: Subject shows increased resistance. The serum needs some adjustments."
+    centered "Day 132: Memories are returning. Must increase serum dosage."
+    centered "Day 146: He asked about his family today. Had to adminster a shock treatment."
 
     mikey "No.... this can't be..."
 
